@@ -30,23 +30,7 @@ namespace Leap_Year.Pages
         [AllowAnonymous]
         public IActionResult OnPost()
         {
-            if ((LeapYear.Year % 400 == 0))
-            {
-                LeapYear.Result = "Rok przystepny";
-            }
-            else if (LeapYear.Year % 100 == 0)
-            {
-                LeapYear.Result = "Rok nie jest przystepny";
-            }
-
-            else if (LeapYear.Year % 4 == 0)
-            {
-                LeapYear.Result = "Rok przystepny";
-            }
-            else
-            {
-                LeapYear.Result = "Rok nie jest przystepny";
-            }
+            LeapYear.Result = _personService.GetLeapYearInfo();
             LeapYear.EmailAddress = User.FindFirstValue(ClaimTypes.Email);
             if(LeapYear.EmailAddress == null)
             {

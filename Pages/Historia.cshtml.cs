@@ -28,6 +28,7 @@ namespace Leap_Year.Pages
         public string CurrentSort { get; set; }
 
         public PaginatedList<LeapYear> leapYears { get; set; }
+        public IQueryable<LeapYear> Records { get; set; }
         public HistoriaModel(Leap_Year.Data.ApplicationDbContext context, IConfiguration configuration, ILeapYearInterface leapInterface)
         {
             _context = context;
@@ -51,11 +52,11 @@ namespace Leap_Year.Pages
             CurrentFilter = searchString;
             
             IQueryable<LeapYear> _LeapYear = from s in _context.LeapYear select s;
-
-            _LeapYear = _LeapYear.OrderByDescending(s => s.SearchTime);
+            Records = _leapInterface.GetActiveUsers();
+            Records = Records.OrderByDescending(s => s.SearchTime);
             var pageSize = _configuration.GetValue("PageSize", 20);
             leapYears = await PaginatedList<LeapYear>.CreateAsync(
-                _LeapYear.AsNoTracking(), pageIndex ?? 1, pageSize);
+                Records.AsNoTracking(), pageIndex ?? 1, pageSize);
         }
 
     }

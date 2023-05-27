@@ -5,5 +5,6 @@ namespace Leap_Year.Interface
     public interface ILeapYearInterface
     {
         public IQueryable<LeapYear> GetActiveUsers();
+        public string GetLeapYearInfo();
     }
 }
