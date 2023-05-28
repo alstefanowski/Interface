@@ -6,5 +6,6 @@ namespace Leap_Year.Interface
     {
         public IQueryable<LeapYear> GetActiveUsers();
         public string GetLeapYearInfo();
+        public void AddAndSave(LeapYear LeapYear);
     }
 }

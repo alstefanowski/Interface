@@ -42,8 +42,7 @@ namespace Leap_Year.Pages
                 LeapYear.IdAddress = "brak";
             }
             LeapYear.SearchTime = DateTime.Now;
-            _dbContext.LeapYear.Add(LeapYear);
-            _dbContext.SaveChanges();
+            _personService.AddAndSave(LeapYear);
             Records = _personService.GetActiveUsers();
             if (!ModelState.IsValid)
             {
